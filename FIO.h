@@ -5,28 +5,30 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define FIO_fields_size 30
 
-struct FIO {
+class FIO {
+private:
 	char SurName[FIO_fields_size]; //Фамилия
 	char Name[FIO_fields_size]; //Имя
 	char Patronymic[FIO_fields_size]; //Отчество
+
+public:
+	//Методы установки...
+	bool SetSurName(char buf[]);//фамилии
+	bool SetName(char buf[]);	//имени
+	bool SetPatronymic(char buf[]);//отчества
+
+	//Методы извлечения...
+	char* GetSurName();//фамилии
+	char* GetName();	//имени
+	char* GetPatronymic();//отчества
+
+	//Метод инициализации структуры
+	bool Init(char buf_surname[], char buf_name[], char buf_patronymic[]);
+
+	//Метод ввода полей объекта класса из консоли
+	bool Read(); //!!!
+
+	//Метод вывода объекта класса в консоль
+	void Display();
 };
-
-//Функция установки фамилии
-void SetSurName(FIO* edit_FIO, char new_surname[]);
-
-//Функция установки имени
-void SetName(FIO* edit_FIO, char new_name[]);
-
-//Функция установки отчества
-void SetPatronymic(FIO *edit_FIO , char new_patronymic[]);
-
-//Функция инициализации структуры
-FIO CreateFIO(char buf_surname[], char buf_name[], char buf_patronymic[]);
-
-//Функция вывода структуры в консоль
-void PrintFio(FIO buf_FIO);
-
-//Функция ввода полей структуры из консоли
-FIO ConsoleCreateFIO();
-
 #endif FIO_H

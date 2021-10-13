@@ -1,61 +1,84 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <string.h>
 #include "FIO.h"
 
 //Защита от переопределения методов структуры
 #ifndef FIO_CPP
 #define FIO_CPP
 
-//Функция установки фамилии
-void SetSurName(FIO* edit_FIO, char new_surname[])
-{
-	for (int i = 0; i < FIO_fields_size; i++)
-		edit_FIO->SurName[i] = new_surname[i];
+//Метод установки фамилии
+bool FIO::SetSurName(char new_surname[]) 
+{ 
+	strcpy(SurName, "gsgsdsddgdgsd");//!!!!!! до 0 
+	if (true)
+		return (true);
+	else
+		return (false);
 }
 
-//Функция установки имени
-void SetName(FIO* edit_FIO, char new_name[])
-{
-	for (int i = 0; i < FIO_fields_size; i++)
-		edit_FIO->Name[i] = new_name[i];
+//Метод  установки имени
+bool FIO::SetName(char new_name[]) { 
+	strcpy(SurName, new_name); 
+	return (false);
 }
 
-//Функция установки отчества
-void SetPatronymic(FIO* edit_FIO, char new_patronymic[])
-{
-	for (int i = 0; i < FIO_fields_size; i++)
-		edit_FIO->Patronymic[i] = new_patronymic[i];
+//Метод  установки отчества
+bool FIO::SetPatronymic(char new_patronymic[]) { 
+	strcpy(Patronymic, new_patronymic); 
+	return (false);
 }
 
-//Функция инициализации структуры
-FIO CreateFIO(char buf_surname[], char buf_name[], char buf_patronymic[])
-{
-	FIO new_FIO;
-	SetSurName(&new_FIO, buf_surname);
-	SetName(&new_FIO, buf_name);
-	SetPatronymic(&new_FIO, buf_patronymic);
+//Метод извлечения фамилии
+FIO::GetSurName() { return SurName; }
 
-	return (new_FIO);
+//Метод извлечения имени
+char* FIO::GetName() { return Name; }
+
+//Метод извлечения отчества
+char* FIO::GetPatronymic() { return Patronymic; };
+
+//Метод  инициализации структуры
+bool FIO::Init(char buf_surname[], char buf_name[], char buf_patronymic[])
+{
+	//Проверка на формат ввода
+	if (SetSurName(buf_surname) || SetName(buf_name) || SetPatronymic(buf_patronymic))
+		return (true);
+	else
+		return (false);
 }
 
-//Функция вывода структуры в консоль
-void PrintFio(FIO buf_FIO)
+//Метод ввода полей структуры из консоли
+bool FIO::Read()
 {
-	printf("FIO: %s %s %s\n", buf_FIO.SurName, buf_FIO.Name, buf_FIO.Patronymic);
-}
-
-//Функция ввода полей структуры из консоли
-FIO ConsoleCreateFIO()
-{
-	FIO new_FIO;
+	char buf_string[FIO_fields_size];
 	printf("Enter surname:\n");
-	scanf("%s", &(new_FIO.SurName));
-	printf("Enter name:\n");
-	scanf("%s", &(new_FIO.Name));
-	printf("Enter partonymic:\n");
-	scanf("%s", &(new_FIO.Patronymic));
+	scanf("%s", &buf_string);
 
-	return new_FIO;
+	if (SetSurName(buf_string))
+		return (true);
+	else 
+	{
+		printf("Enter name:\n");
+		scanf("%s", &buf_string);
+
+		if (SetName(buf_string))
+			return(true);
+		else
+		{
+			printf("Enter patronymic:\n");
+			scanf("%s", &buf_string);
+
+			if (SetPatronymic(buf_string))
+				return(true);
+		}
+	}
+}
+
+//Метод вывода структуры в консоль
+void FIO::Display()
+{
+	printf("FIO: %s %s %s\n", SurName, Name, Patronymic);
 }
 
 #endif FIO_CPP
