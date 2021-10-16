@@ -1,5 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <conio.h>
+#include <string.h>
 //#include "student.h"
 //#include "teacher.h"
 //#include "faculty.h"
@@ -10,29 +12,30 @@ int main()
 {
 	///FIO struct
 	printf("--------FIO struct--------\n");
-	char Familia[] = "Sidenko";
-	char Imya[] = "Matvey";
-	char Otchestvo[] = "Evgen'evich";
+	char Familia[30] = "Sidenko";
+	char Imya[30] = "Matvey";
+	char Otchestvo[30] = "Evgenievich";
 
 	//Создание нового объекта из готовых данных
 	printf("---initialization function---\n");
 	FIO my_FIO;
-	my_FIO.Init(Familia, Imya, Otchestvo);
-	my_FIO.Display();
-
-	printf("\n\n%s", my_FIO.GetSurName());
+	
+	if(!my_FIO.Init(Familia, Imya, Otchestvo))
+		my_FIO.Display();
 
 	//Ввод полей объекта из консоли
-	//printf("\n---console enter function---\n");
-	//my_FIO.Read();
-	//my_FIO.Display();
+	printf("\n---console enter function---\n");
+	if (!my_FIO.Read())
+		my_FIO.Display();
+	else
+		printf("reading error\n");
 
 	//Ввод полей объекта с помощью методов
-	//printf("\n--------function enter--------\n");
-	//my_FIO.SetSurName();
-	//my_FIO.SetName();
-	//my_FIO.SetPatronymic();
-	//my_FIO.Display();
+	printf("\n--------function enter--------\n");
+	my_FIO.SetSurName(strcpy(Familia, " Ivanov "));
+	my_FIO.SetName(strcpy(Imya, " Ivan "));
+	my_FIO.SetPatronymic(strcpy(Otchestvo, " Ivanovich "));
+	my_FIO.Display();
 
 
 	/*
@@ -127,5 +130,6 @@ int main()
 	printf("Students to teachers quantity: %0.2lf\n", ProcOfStudToTeach(my_faculty));
 
 	*/
+	printf("\nPress any key to exit.\n");
 	_getch();
 }

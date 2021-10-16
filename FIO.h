@@ -17,7 +17,7 @@ public:
 	bool SetName(char buf[]);	//имени
 	bool SetPatronymic(char buf[]);//отчества
 
-	//Методы извлечения...
+	//Методы извлечения... !!!!!
 	char* GetSurName();//фамилии
 	char* GetName();	//имени
 	char* GetPatronymic();//отчества
@@ -26,7 +26,7 @@ public:
 	bool Init(char buf_surname[], char buf_name[], char buf_patronymic[]);
 
 	//Метод ввода полей объекта класса из консоли
-	bool Read(); //!!!
+	bool Read();
 
 	//Метод вывода объекта класса в консоль
 	void Display();

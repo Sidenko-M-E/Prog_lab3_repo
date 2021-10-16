@@ -14,7 +14,7 @@ void PrintHuman(human buf_human)
 	printf("weight: %0.1f\n", buf_human.weight);
 	printf("height: %0.1f\n", buf_human.height);
 	printf("gender: %c\n", buf_human.gender);
-	PrintFio(buf_human.human_FIO);
+	buf_human.human_FIO.Display();
 }
 
 //Функция инициализации структуры
@@ -47,7 +47,7 @@ human ConsoleCreateHuman()
 	printf("Enter gender:\n");
 	scanf("%s", &(new_human.gender));
 
-	new_human.human_FIO = ConsoleCreateFIO();
+	new_human.human_FIO.Read();
 
 	return new_human;
 }
