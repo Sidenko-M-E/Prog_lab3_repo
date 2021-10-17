@@ -103,11 +103,29 @@ char human::GetGender()
 	return (buf);
 }
 
+//Метод инициализации объекта класса
 bool human::Init(int buf_id, int buf_age, int buf_height, float buf_weight, char buf_gender, FIO buf_FIO)
 {
-	return false;
+	//создаём объект класса human для проверки формата входных данных
+	human check;
+
+	//проверка на формат ввода FIO??????????
+	if (check.SetId(buf_id) || check.SetAge(buf_age) || check.SetHeight(buf_height) || 
+		check.SetWeight(buf_weight) || check.SetGender(buf_gender))
+		return (true);
+	else
+	{
+		SetId(check.GetId());
+		SetAge(check.GetAge());
+		SetHeight(check.GetHeight());
+		SetWeight(check.GetWeight());
+		SetGender(check.GetGender());
+		human_FIO = check.human_FIO;
+		return (false);
+	}
 }
 
+//Метод ввода полей объекта класса из консоли
 bool human::Read()
 {
 	//создаём объект класса human для проверки формата входных данных
@@ -213,21 +231,6 @@ void human::Display()
 	printf("weight: %0.1f\n", weight);
 	printf("gender: %c\n", gender);
 	human_FIO.Display();
-}
-
-
-//Функция инициализации структуры
-human CreateHuman(int buf_id, int buf_age, float buf_weight, float buf_height, char buf_gender, FIO buf_FIO)
-{
-	human new_human;
-	new_human.id = buf_id;
-	new_human.age = buf_age;
-	new_human.weight = buf_weight;
-	new_human.height = buf_height;
-	new_human.gender = buf_gender;
-	new_human.human_FIO = buf_FIO;
-
-	return new_human;
 }
 
 #endif HUMAN_CPP
