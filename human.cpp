@@ -113,21 +113,17 @@ bool human::Read()
 	return false;
 }
 
+//Метод вывода содержимого объекта класса в консоль
 void human::Display()
 {
+	printf("id: %d\n", id);
+	printf("age: %d\n", age);
+	printf("height: %d\n", height);
+	printf("weight: %0.1f\n", weight);
+	printf("gender: %c\n", gender);
+	human_FIO.Display();
 }
 
-
-//Функция вывода структуры в консоль
-void PrintHuman(human buf_human) 
-{
-	printf("id: %d\n", buf_human.id);
-	printf("age: %d\n", buf_human.age);
-	printf("weight: %0.1f\n", buf_human.weight);
-	printf("height: %0.1f\n", buf_human.height);
-	printf("gender: %c\n", buf_human.gender);
-	buf_human.human_FIO.Display();
-}
 
 //Функция инициализации структуры
 human CreateHuman(int buf_id, int buf_age, float buf_weight, float buf_height, char buf_gender, FIO buf_FIO)
