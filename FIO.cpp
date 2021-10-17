@@ -16,7 +16,7 @@ bool FIO::SetSurName(char buf_string[]) //проверка на \n ????
 		buf_string[FIO_fields_size - 1] = '\0';
 
 	//Проверка на ввод пустой строки
-	if (strlen(buf_string) == 1)
+	if (strlen(buf_string) == 0)
 		return (true);
 
 	//определение массива недопустимых символов
@@ -44,7 +44,7 @@ bool FIO::SetName(char buf_string[])
 		buf_string[FIO_fields_size - 1] = '\0';
 
 	//Проверка на ввод пустой строки
-	if (strlen(buf_string) == 1)
+	if (strlen(buf_string) == 0)
 		return (true);
 
 	//определение массива недопустимых символов
@@ -72,7 +72,7 @@ bool FIO::SetPatronymic(char buf_string[])
 		buf_string[FIO_fields_size - 1] = '\0';
 
 	//Проверка на ввод пустой строки
-	if (strlen(buf_string) == 1)
+	if (strlen(buf_string) == 0)
 		return (true);
 
 	//определение массива недопустимых символов
