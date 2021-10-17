@@ -120,7 +120,7 @@ bool human::Init(int buf_id, int buf_age, int buf_height, float buf_weight, char
 		SetHeight(check.GetHeight());
 		SetWeight(check.GetWeight());
 		SetGender(check.GetGender());
-		human_FIO = check.human_FIO;
+		human_FIO = buf_FIO;
 		return (false);
 	}
 }

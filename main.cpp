@@ -6,54 +6,69 @@
 //#include "teacher.h"
 //#include "faculty.h"
 #include "FIO.h"
+#include "human.h"
 
 
 int main()
 {
 	///FIO struct
-	printf("--------FIO struct--------\n");
+	printf("--------FIO class--------\n");
 	char Familia[30] = "Sidenko";
 	char Imya[30] = "Matvey";
 	char Otchestvo[30] = "Evgenievich";
 
 	//—оздание нового объекта из готовых данных
-	printf("---initialization function---\n");
+	printf("------Init method-------\n");
 	FIO my_FIO;
 	
-	if(!my_FIO.Init(Familia, Imya, Otchestvo))
+	if(my_FIO.Init(Familia, Imya, Otchestvo))
+		printf("error\n");
+	else
 		my_FIO.Display();
 
 	//¬вод полей объекта из консоли
-	printf("\n---console enter function---\n");
+	printf("\n---Read method---\n");
 	if (!my_FIO.Read())
 		my_FIO.Display();
 	else
-		printf("reading error\n");
+		printf("error\n");
 
 	//¬вод полей объекта с помощью методов
-	printf("\n--------function enter--------\n");
-	my_FIO.SetSurName(strcpy(Familia, " Ivanov "));
-	my_FIO.SetName(strcpy(Imya, " Ivan "));
-	my_FIO.SetPatronymic(strcpy(Otchestvo, " Ivanovich "));
-	my_FIO.Display();
+	printf("\n------Set methods-------\n");
+	if ((my_FIO.SetSurName(strcpy(Familia, " Ivanov ")))||(my_FIO.SetName(strcpy(Imya, " Ivan ")))||(my_FIO.SetPatronymic(strcpy(Otchestvo, " Ivanovich "))))
+		printf("error\n");
+	else
+		my_FIO.Display();
 
 
-	/*
 	///human struct
 	printf("\n--------human struct--------\n");
-	//—оздание новой структуры из готовых данных
-	printf("---initialization function---\n");
-	human me = CreateHuman(1913, 19, 70, 182, 'M', my_FIO);
-	PrintHuman(me);
 
-	//—оздание новой структуры из консоли
-	printf("\n---console enter function---\n");
-	me = ConsoleCreateHuman();
-	printf("\n");
-	PrintHuman(me);
+	//—оздание нового объекта из готовых данных
+	printf("-------Init method-------\n");
+	human me;
 
+	if(me.Init(1913, 19, 70, 182, 'M', my_FIO))
+		printf("error\n");
+	else
+		me.Display();
+	
+	//¬вод полей объекта из консоли
+	printf("\n------Read method------\n");
+	if (me.Read())
+		printf("error\n");
+	else
+		me.Display();
 
+	//¬вод полей объекта с помощью методов
+	printf("\n------Set methods-------\n");
+	if (me.SetId(1999) || me.SetAge(27) || me.SetHeight(180) ||
+		me.SetWeight(80.890) || me.SetGender('M'))
+		printf("error\n");
+	else
+		me.Display();
 
+	/*
 	///student struct
 	printf("\n--------student struct--------\n");
 	char EduProg[] = "Bachelor";
