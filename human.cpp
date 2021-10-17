@@ -68,29 +68,39 @@ bool human::SetGender(char buf)
 		return (true);
 }
 
+//Метод извлечения id
 int human::GetId()
 {
-	return 0;
+	int buf = id;
+	return (buf);
 }
 
+//Метод извлечения возраста
 int human::GetAge()
 {
-	return 0;
+	int buf = age;
+	return (buf);
 }
 
+//Метод извлечения роста
 int human::GetHeight()
 {
-	return 0;
+	int buf = height;
+	return (buf);
 }
 
+//Метод извлечения веса
 float human::GetWeight()
 {
-	return 0.0f;
+	float buf = weight;
+	return (buf);
 }
 
+//Метод извлечения пола
 char human::GetGender()
 {
-	return 0;
+	char buf = gender;
+	return (buf);
 }
 
 bool human::Init(int buf_id, int buf_age, int buf_height, float buf_weight, char buf_gender, FIO buf_FIO)
