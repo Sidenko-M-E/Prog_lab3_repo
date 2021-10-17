@@ -131,18 +131,28 @@ char* student::GetFacultyName()
 	return (buf_string);
 }
 
+//Метод  инициализации объекта класса
 bool student::Init(int buf_course, char buf_EduProg[], char buf_Group[], char buf_FacultyName[], human buf_human)
 {
-	student new_student;
-	new_student.course = buf_course;
-	SetEduProg(&new_student, buf_EduProg);
-	SetGroup(&new_student, buf_Group);
-	SetFacultyName(&new_student, buf_FacultyName);
-	new_student.thehuman = buf_human;
+	//создаём объект класса human для проверки формата входных данных
+	student check;
 
-	return new_student;
+	//проверка на формат ввода human??????????
+	if (check.SetCourse(buf_course) || check.SetEduProg(buf_EduProg) || check.SetGroup(buf_Group) ||
+		check.SetFacultyName(buf_FacultyName))
+		return (true);
+	else
+	{
+		SetCourse(check.GetCourse());
+		SetEduProg(check.GetEduProg());
+		SetGroup(check.GetGroup());
+		SetFacultyName(check.GetFacultyName());
+		thehuman = buf_human;
+		return (false);
+	}
 }
 
+//Метод ввода полей объекта класса из консоли
 bool student::Read()
 {
 	student new_student;
@@ -160,11 +170,12 @@ bool student::Read()
 	return(new_student);
 }
 
+//Метод вывода содержимого объекта класса в консоль
 void student::Display()
 {
-	//PrintHuman(buf_student.thehuman);
-	printf("course: %d\n", buf_student.course);
-	printf("direction of preparation: %s\n", buf_student.EduProg);
-	printf("group: %s\n", buf_student.Group);
-	printf("faculty name: %s\n", buf_student.FacultyName);
+	printf("course: %d\n", course);
+	printf("direction of preparation: %s\n", EduProg);
+	printf("group: %s\n", Group);
+	printf("faculty name: %s\n", FacultyName);
+	thehuman.Display();
 }
