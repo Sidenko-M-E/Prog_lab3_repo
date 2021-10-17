@@ -137,7 +137,7 @@ bool human::Read()
 
 	//проверка на формат входных данных
 	printf("Enter id:\n");
-	if (scanf("%d", buf_int) != 1)
+	if (scanf("%d", &buf_int) != 1)
 		return (true);
 	else 
 	{
@@ -148,7 +148,7 @@ bool human::Read()
 		{
 			//проверка на формат входных данных
 			printf("Enter age:\n");
-			if (scanf("%d", buf_int) != 1)
+			if (scanf("%d", &buf_int) != 1)
 				return (true);
 			else
 			{
@@ -159,7 +159,7 @@ bool human::Read()
 				{
 					//проверка на формат входных данных
 					printf("Enter height:\n");
-					if (scanf("%d", buf_int) != 1)
+					if (scanf("%d", &buf_int) != 1)
 						return (true);
 					else
 					{
@@ -174,7 +174,7 @@ bool human::Read()
 
 							//проверка на формат входных данных
 							printf("Enter weight:\n");
-							if (scanf("%f", buf_float) != 1)
+							if (scanf("%f", &buf_float) != 1)
 								return (true);
 							else
 							{
@@ -189,7 +189,7 @@ bool human::Read()
 
 									//проверка на формат входных данных
 									printf("Enter gender:\n");
-									if (scanf("%c", buf_char) != 1)
+									if (scanf("%c", &buf_char) != 1)
 										return (true);
 									else
 									{
