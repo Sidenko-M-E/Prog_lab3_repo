@@ -1,23 +1,30 @@
 #include "human.h"
 
-struct teacher {
+class teacher {
+private:
+	int WorkExp;//рабочий стаж
+	char Degree[40];//ученая степень
+	char FacultyName[30];//название факультета
+
+public:
 	human thehuman; //подструктура "human"
-	int WorkExp;  //рабочий стаж
-	char Degree[40];	//ученая степень
-	char FacultyName[30];	//название факультета
+
+	//Методы установки...
+	bool SetWorkExp(int buf);//рабочего стажа
+	bool SetDegree(char buf_string[]);//ученой степени
+	bool SetFacultyName(char buf_string[]);//названия факультета
+
+	//Методы извлечения...
+	int GetWorkExp();//рабочего стажа
+	char* GetDegree();//ученой степени
+	char* GetFacultyName();//названия факультета
+
+	//Метод  инициализации объекта класса
+	bool Init(int buf_WorkExp, char buf_Degree[], char buf_FacultyName[], human buf_human);
+
+	//Метод ввода полей объекта класса из консоли
+	bool Read();
+
+	//Метод вывода содержимого объекта класса в консоль
+	void Display();
 };
-
-//Функция установки ученой степени
-void SetDegree(teacher* edit_teacher, char new_degree[]);
-
-//Функция установки факультета
-void SetFacultyName(teacher* edit_teacher, char new_facultyname[]);
-
-//Функция инициализации структуры
-teacher CreateTeacher(human buf_human, int buf_WorkExp, char buf_Degree[], char buf_FacultyName[]);
-
-//Функция вывода структуры в консоль
-void PrintTeacher(teacher buf_teacher);
-
-//Функция ввода полей структуры из консоли
-teacher ConsoleCreateTeacher();

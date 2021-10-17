@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
-//#include "student.h"
+#include "student.h"
 //#include "teacher.h"
 //#include "faculty.h"
 #include "FIO.h"

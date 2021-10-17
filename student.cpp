@@ -143,10 +143,10 @@ bool student::Init(int buf_course, char buf_EduProg[], char buf_Group[], char bu
 		return (true);
 	else
 	{
-		SetCourse(check.GetCourse());
-		SetEduProg(check.GetEduProg());
-		SetGroup(check.GetGroup());
-		SetFacultyName(check.GetFacultyName());
+		SetCourse(buf_course);
+		SetEduProg(buf_EduProg);
+		SetGroup(buf_Group);
+		SetFacultyName(buf_FacultyName);
 		thehuman = buf_human;
 		return (false);
 	}
