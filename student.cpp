@@ -155,19 +155,86 @@ bool student::Init(int buf_course, char buf_EduProg[], char buf_Group[], char bu
 //Метод ввода полей объекта класса из консоли
 bool student::Read()
 {
-	student new_student;
-	//new_student.thehuman = ConsoleCreateHuman();
+	//создаём объект класса student для проверки формата входных данных
+	student check;
 
+	//буферный переменная типа int 
+	//для проверки формата входных данных 
+	int buf_int;
+
+	//проверка на формат входных данных
 	printf("Enter course:\n");
-	scanf("%d", &(new_student.course));
-	printf("Enter education programm:\n");
-	scanf("%s", &(new_student.EduProg));
-	printf("Enter group:\n");
-	scanf("%s", &(new_student.Group));
-	printf("Enter faculty name:\n");
-	scanf("%s", &(new_student.FacultyName));
+	if (scanf("%d", &buf_int) != 1)
+		return (true);
+	else
+	{
+		//попытка записи в поле объекта
+		if (check.SetCourse(buf_int))
+			return (true);
+		else
+		{
+			//создаём буферную строку для проверки формата входных данных
+			char buf_string[FIO_fields_size];
 
-	return(new_student);
+			printf("Enter education programm:\n");
+			fgets(buf_string, FIO_fields_size / 3 * 2, stdin);
+			//если строка короче 20, то заменить "перенос на новую строку" "концом строки"
+			if (buf_string[strlen(buf_string) - 1] == '\n')
+				buf_string[strlen(buf_string) - 1] = '\0';
+			//если строка длиннее 20, то очистить входной поток
+			else rewind(stdin);
+
+			//попытка записи в поле объекта
+			if (check.SetEduProg(buf_string))
+				return (true);
+			else
+			{
+				printf("Enter group:\n");
+				fgets(buf_string, FIO_fields_size / 3, stdin);
+				//если строка короче 10, то заменить "перенос на новую строку" "концом строки"
+				if (buf_string[strlen(buf_string) - 1] == '\n')
+					buf_string[strlen(buf_string) - 1] = '\0';
+				//если строка длиннее 10, то очистить входной поток
+				else rewind(stdin);
+
+				//попытка записи в поле объекта
+				if (check.SetGroup(buf_string))
+					return (true);
+				else
+				{
+					printf("Enter faculty name:\n");
+					fgets(buf_string, FIO_fields_size, stdin);
+					//если строка короче 10, то заменить "перенос на новую строку" "концом строки"
+					if (buf_string[strlen(buf_string) - 1] == '\n')
+						buf_string[strlen(buf_string) - 1] = '\0';
+					//если строка длиннее 10, то очистить входной поток
+					else rewind(stdin);
+
+					//попытка записи в поле объекта
+					if (check.SetFacultyName(buf_string))
+						return (true);
+					else
+					{
+						//попытка записи в объект
+						if (check.thehuman.Read())
+							return (true);
+
+						//когда все проверки пройдены,
+						//можно перенести данные в главный объект
+						else
+						{
+							SetCourse(check.GetCourse());
+							SetEduProg(check.GetEduProg());
+							SetGroup(check.GetGroup());
+							SetFacultyName(check.GetFacultyName());
+							thehuman = check.thehuman;
+							return(false);
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 //Метод вывода содержимого объекта класса в консоль
