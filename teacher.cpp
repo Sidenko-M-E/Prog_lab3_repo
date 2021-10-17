@@ -31,7 +31,7 @@ teacher CreateTeacher(human buf_human, int buf_WorkExp, char buf_Degree[], char 
 //Функция вывода структуры в консоль
 void PrintTeacher(teacher buf_teacher)
 {
-	PrintHuman(buf_teacher.thehuman);
+	//PrintHuman(buf_teacher.thehuman);
 	printf("working experience: %d years\n", buf_teacher.WorkExp);
 	printf("scientific degree: %s\n", buf_teacher.Degree);
 	printf("faculty name: %s\n", buf_teacher.FacultyName);
@@ -41,7 +41,7 @@ void PrintTeacher(teacher buf_teacher)
 teacher ConsoleCreateTeacher()
 {
 	teacher new_teacher;
-	new_teacher.thehuman = ConsoleCreateHuman();
+	//new_teacher.thehuman = ConsoleCreateHuman();
 
 	printf("Enter working experience:\n");
 	scanf("%d", &(new_teacher.WorkExp));

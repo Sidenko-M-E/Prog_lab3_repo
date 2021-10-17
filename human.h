@@ -13,7 +13,7 @@ private:
 	char gender;  //пол
 
 public:
-	FIO human_FIO;	  //подструктура ФИО
+	FIO human_FIO;	  //объект класса FIO
 
 	//Методы установки... 
 	bool SetId(int buf); //id
