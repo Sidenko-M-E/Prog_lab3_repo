@@ -13,11 +13,11 @@ private:
 
 public:
 	//Методы установки...
-	bool SetSurName(char buf[]);//фамилии
-	bool SetName(char buf[]);	//имени
-	bool SetPatronymic(char buf[]);//отчества
+	bool SetSurName(char buf_string[]);//фамилии
+	bool SetName(char buf_string[]);	//имени
+	bool SetPatronymic(char buf_string[]);//отчества
 
-	//Методы извлечения... !!!!!
+	//Методы извлечения...
 	char* GetSurName();//фамилии
 	char* GetName();	//имени
 	char* GetPatronymic();//отчества
