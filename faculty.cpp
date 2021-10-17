@@ -1,50 +1,210 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <string.h>
+#include <malloc.h>
 #include "faculty.h"
 
-//Функция установки названия факультета
-void SetFacultyName(faculty* edit_faculty, char new_facultyname[])
+//Метод установки названия факультета
+bool faculty::SetFacultyName(char buf_string[])
 {
-	for (int i = 0; i < 30; i++)
-		edit_faculty->FacultyName[i] = new_facultyname[i];
+	//обрезка входной строки
+	if (strlen(buf_string) > 30)
+		buf_string[30 - 1] = '\0';
+
+	//проверка на ввод пустой строки
+	if (strlen(buf_string) == 0)
+		return (true);
+
+	//определение массива недопустимых символов
+	char invalid_symbols[] = "!@#$%^&*()_+1234567890-=\"№;:?*,./'][{}<>~` ";
+	int invalid_symbols_lenght = 43;
+
+	//посимвольное сравнение входной строки и массива недопустимых символов
+	int buf_len = strlen(buf_string);
+	for (int i = 0; i < buf_len; i++)
+		for (int j = 0; j < invalid_symbols_lenght; j++)
+			if (buf_string[i] == invalid_symbols[j])
+				return(true);
+
+	//копирование входной строки в поле объекта,
+	//при успешном прохождении проверки
+	strcpy(FacultyName, buf_string);
+	return (false);
 }
 
-//Функция установки информации о студентах
-void SetStudentsInfo(faculty* edit_faculty, int all_quan, int bach_quan, int mast_quan)
+
+bool faculty::SetQuantityOfStudents(int buf)
 {
-	edit_faculty->QuantityOfStudents = all_quan;
-	edit_faculty->QuantityOfBachelors = bach_quan;
-	edit_faculty->QuantityOfMasters = mast_quan;
+	if (buf < 0 || buf > 1000)
+		return (true);
+	else
+	{
+		QuantityOfStudents = buf;
+		return (false);
+	}
 }
 
-//Функция установки информации о преподавателях
-void SetTeachersInfo(faculty* edit_faculty, int all_quan, int cand_quan, int doct_quan)
+
+bool faculty::SetQuantityOfBachelors(int buf)
 {
-	edit_faculty->QuantityOfTeachers = all_quan;
-	edit_faculty->QuantityOfCandidates = cand_quan;
-	edit_faculty->QuantityOfDoctors = doct_quan;
+	if (buf < 0 || buf > 1000)
+		return (true);
+	else
+	{
+		QuantityOfBachelors = buf;
+		return (false);
+	}
 }
 
-//Функция подсчёта процентного кол-ва магистров среди учащихся
-double ProcentOfMasters(faculty oper_faculty)
+
+bool faculty::SetQuantityOfMasters(int buf)
 {
-	return(((double)oper_faculty.QuantityOfMasters) / ((double)oper_faculty.QuantityOfStudents) * 100);
+	if (buf < 0 || buf > 1000)
+		return (true);
+	else
+	{
+		QuantityOfMasters = buf;
+		return (false);
+	}
 }
 
-//Функция подсчёта процентного кол-ва докторов наук среди преподавателей
-double ProcentOfDoctors(faculty oper_faculty)
+
+bool faculty::SetQuantityOfTeachers(int buf)
 {
-	return(((double)oper_faculty.QuantityOfDoctors) / ((double)oper_faculty.QuantityOfTeachers) * 100);
+	if (buf < 0 || buf > 100)
+		return (true);
+	else
+	{
+		QuantityOfTeachers = buf;
+		return (false);
+	}
 }
 
-//Функция подсчёта кол-ва студентов, приходящихся на одного преподавателя
-double ProcOfStudToTeach(faculty oper_faculty)
+
+bool faculty::SetQuantityOfCandidates(int buf)
 {
-	return(((double)oper_faculty.QuantityOfStudents) / ((double)oper_faculty.QuantityOfTeachers));
+	if (buf < 0 || buf > 100)
+		return (true);
+	else
+	{
+		QuantityOfCandidates = buf;
+		return (false);
+	}
 }
 
-//Функция инициализации структуры
-faculty CreateFaculty(char buf_FacultyName[], int stud_quan, int bach_quan, int mast_quan, int teach_quan, int cand_quan, int doct_quan, int disc_quan)
+
+bool faculty::SetQuantityOfDoctors(int buf)
+{
+	if (buf < 0 || buf > 100)
+		return (true);
+	else
+	{
+		QuantityOfDoctors = buf;
+		return (false);
+	}
+}
+
+
+bool faculty::SetQuantityOfDisciplines(int buf)
+{
+	if (buf < 0 || buf > 100)
+		return (true);
+	else
+	{
+		QuantityOfDisciplines = buf;
+		return (false);
+	}
+}
+
+
+bool faculty::SetStudentsInfo(int all_quan, int bach_quan, int mast_quan)
+{
+	
+}
+
+
+bool faculty::SetTeachersInfo(int all_quan, int cand_quan, int doct_quan)
+{
+	
+}
+
+
+char* faculty::GetFacultyName()
+{
+	char* buf_string = (char*)calloc(30, sizeof(char));
+	strcpy(buf_string, FacultyName);
+	return (buf_string);
+}
+
+
+int faculty::GetQuantityOfStudents()
+{
+	int buf = QuantityOfStudents;
+	return (buf);
+}
+
+
+int faculty::GetQuantityOfBachelors()
+{
+	int buf = QuantityOfBachelors;
+	return (buf);
+}
+
+
+int faculty::GetQuantityOfMasters()
+{
+	int buf = QuantityOfMasters;
+	return (buf);
+}
+
+
+int faculty::GetQuantityOfTeachers()
+{
+	int buf = QuantityOfTeachers;
+	return (buf);
+}
+
+
+int faculty::GetQuantityOfCandidates()
+{
+	int buf = QuantityOfCandidates;
+	return (buf);
+}
+
+
+int faculty::GetQuantityOfDoctors()
+{
+	int buf = QuantityOfDoctors;
+	return (buf);
+}
+
+
+int faculty::GetQuantityOfDisciplines()
+{
+	int buf = QuantityOfDisciplines;
+	return (buf);
+}
+
+
+double faculty::ProcentOfMasters()
+{
+	return(((double)QuantityOfMasters) / ((double)QuantityOfStudents) * 100);
+}
+
+
+double faculty::ProcentOfDoctors()
+{
+	return(((double)QuantityOfDoctors) / ((double)QuantityOfTeachers) * 100);
+}
+
+
+double faculty::ProcOfStudToTeach()
+{
+	return(((double)QuantityOfStudents) / ((double)QuantityOfTeachers));
+}
+
+
+bool faculty::Init(char buf_FacultyName[], int stud_quan, int bach_quan, int mast_quan, int teac_quan, int cand_quan, int doct_quan, int disc_quan)
 {
 	faculty new_faculty;
 	SetFacultyName(&new_faculty, buf_FacultyName);
@@ -55,23 +215,7 @@ faculty CreateFaculty(char buf_FacultyName[], int stud_quan, int bach_quan, int 
 	return new_faculty;
 }
 
-//Функция вывода структуры в консоль
-void PrintFaculty(faculty buf_faculty)
-{
-	printf("faculty name: %s\n", buf_faculty.FacultyName);
-	printf("quantity of students: %d\n", buf_faculty.QuantityOfStudents);
-	printf("quantity of bachelors: %d\n", buf_faculty.QuantityOfBachelors);
-	printf("quantity of masters: %d\n\n", buf_faculty.QuantityOfMasters);
-
-	printf("quantity of teachers: %d\n", buf_faculty.QuantityOfTeachers);
-	printf("quantity of candidates: %d\n", buf_faculty.QuantityOfCandidates);
-	printf("quantity of doctors: %d\n\n", buf_faculty.QuantityOfDoctors);
-
-	printf("quantity of disciplines: %d\n", buf_faculty.QuantityOfDisciplines);
-}
-
-//Функция ввода полей структуры из консоли
-faculty ConsoleCreateFaculty()
+bool faculty::Read()
 {
 	faculty new_faculty;
 
@@ -95,4 +239,19 @@ faculty ConsoleCreateFaculty()
 	scanf("%d", &(new_faculty.QuantityOfDisciplines));
 
 	return(new_faculty);
+}
+
+//Метод вывода содержимого объекта класса в консоль
+void faculty::Display()
+{
+	printf("faculty name: %s\n", FacultyName);
+	printf("quantity of students: %d\n", QuantityOfStudents);
+	printf("quantity of bachelors: %d\n", QuantityOfBachelors);
+	printf("quantity of masters: %d\n\n", QuantityOfMasters);
+
+	printf("quantity of teachers: %d\n", QuantityOfTeachers);
+	printf("quantity of candidates: %d\n", QuantityOfCandidates);
+	printf("quantity of doctors: %d\n\n", QuantityOfDoctors);
+
+	printf("quantity of disciplines: %d\n", QuantityOfDisciplines);
 }
