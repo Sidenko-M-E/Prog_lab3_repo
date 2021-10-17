@@ -110,7 +110,98 @@ bool human::Init(int buf_id, int buf_age, int buf_height, float buf_weight, char
 
 bool human::Read()
 {
-	return false;
+	//создаём объект класса human для проверки формата входных данных
+	human check;
+
+	//буферный переменная типа int 
+	//для проверки формата входных данных 
+	int buf_int;
+
+	//проверка на формат входных данных
+	printf("Enter id:\n");
+	if (scanf("%d", buf_int) != 1)
+		return (true);
+	else 
+	{
+		//попытка записи в поле объекта
+		if (check.SetId(buf_int))
+			return (true);
+		else
+		{
+			//проверка на формат входных данных
+			printf("Enter age:\n");
+			if (scanf("%d", buf_int) != 1)
+				return (true);
+			else
+			{
+				//попытка записи в поле объекта
+				if (check.SetAge(buf_int))
+					return (true);
+				else
+				{
+					//проверка на формат входных данных
+					printf("Enter height:\n");
+					if (scanf("%d", buf_int) != 1)
+						return (true);
+					else
+					{
+						//попытка записи в поле объекта
+						if (check.SetHeight(buf_int))
+							return (true);
+						else
+						{
+							float buf_float;
+
+							//проверка на формат входных данных
+							printf("Enter weight:\n");
+							if (scanf("%f", buf_float) != 1)
+								return (true);
+							else
+							{
+								//попытка записи в поле объекта
+								if (check.SetWeight(buf_float))
+									return (true);
+								else
+								{
+									char buf_char;
+
+									//проверка на формат входных данных
+									printf("Enter gender:\n");
+									if (scanf("%c", buf_char) != 1)
+										return (true);
+									else
+									{
+										//попытка записи в поле объекта
+										if (check.SetAge(buf_char))
+											return (true);
+										else
+										{
+											//попытка записи в объект
+											if (check.human_FIO.Read())
+												return (true);
+
+											//когда все проверки пройдены,
+											//можно перенести данные в главный объект
+											else
+											{
+												SetId(check.GetId());
+												SetAge(check.GetAge());
+												SetHeight(check.GetHeight());
+												SetWeight(check.GetWeight());
+												SetGender(check.GetGender());
+												human_FIO = check.human_FIO;
+												return(false);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 //Метод вывода содержимого объекта класса в консоль
@@ -135,27 +226,6 @@ human CreateHuman(int buf_id, int buf_age, float buf_weight, float buf_height, c
 	new_human.height = buf_height;
 	new_human.gender = buf_gender;
 	new_human.human_FIO = buf_FIO;
-
-	return new_human;
-}
-
-//Функция ввода полей структуры из консоли
-human ConsoleCreateHuman()
-{
-	human new_human;
-
-	printf("Enter id:\n");
-	scanf("%d", &(new_human.id));
-	printf("Enter age:\n");
-	scanf("%d", &(new_human.age));
-	printf("Enter weight:\n");
-	scanf("%f", &(new_human.weight));
-	printf("Enter height:\n");
-	scanf("%f", &(new_human.height));
-	printf("Enter gender:\n");
-	scanf("%s", &(new_human.gender));
-
-	new_human.human_FIO.Read();
 
 	return new_human;
 }
