@@ -15,7 +15,7 @@ bool FIO::SetSurName(char buf_string[]) //проверка на \n ????
 	if (strlen(buf_string) > FIO_fields_size)
 		buf_string[FIO_fields_size - 1] = '\0';
 
-	//Проверка на ввод пустой строки
+	//проверка на ввод пустой строки
 	if (strlen(buf_string) == 0)
 		return (true);
 
@@ -43,7 +43,7 @@ bool FIO::SetName(char buf_string[])
 	if (strlen(buf_string) > FIO_fields_size)
 		buf_string[FIO_fields_size - 1] = '\0';
 
-	//Проверка на ввод пустой строки
+	//проверка на ввод пустой строки
 	if (strlen(buf_string) == 0)
 		return (true);
 
@@ -71,7 +71,7 @@ bool FIO::SetPatronymic(char buf_string[])
 	if (strlen(buf_string) > FIO_fields_size)
 		buf_string[FIO_fields_size - 1] = '\0';
 
-	//Проверка на ввод пустой строки
+	//проверка на ввод пустой строки
 	if (strlen(buf_string) == 0)
 		return (true);
 
@@ -92,6 +92,7 @@ bool FIO::SetPatronymic(char buf_string[])
 	return (false);
 }
 
+//Метод извлечения фамилии
 char* FIO::GetSurName()
 {
 	char* buf_string = (char*)calloc(FIO_fields_size, sizeof(char));
@@ -115,13 +116,13 @@ char* FIO::GetPatronymic()
 	return (buf_string);
 }
 
-//Метод  инициализации структуры
+//Метод  инициализации объекта класса
 bool FIO::Init(char buf_surname[], char buf_name[], char buf_patronymic[])
 {
 	//создаём объект класса FIO для проверки формата входных данных
 	FIO check;
 
-	//Проверка на формат ввода
+	//проверка на формат ввода
 	if (check.SetSurName(buf_surname) || check.SetName(buf_name) || check.SetPatronymic(buf_patronymic))
 		return (true);
 	else
@@ -133,7 +134,7 @@ bool FIO::Init(char buf_surname[], char buf_name[], char buf_patronymic[])
 	}
 }
 
-//Метод ввода полей структуры из консоли
+//Метод ввода полей объекта класса из консоли
 bool FIO::Read()
 {
 	//создаём объект класса FIO для проверки формата входных данных
@@ -190,7 +191,7 @@ bool FIO::Read()
 	}
 }
 
-//Метод вывода структуры в консоль
+//Метод вывода содержимого объекта класса в консоль
 void FIO::Display()
 {
 	printf("FIO: %s %s %s\n", SurName, Name, Patronymic);
