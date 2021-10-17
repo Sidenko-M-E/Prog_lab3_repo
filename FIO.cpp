@@ -15,6 +15,10 @@ bool FIO::SetSurName(char buf_string[]) //проверка на \n ????
 	if (strlen(buf_string) > FIO_fields_size)
 		buf_string[FIO_fields_size - 1] = '\0';
 
+	//Проверка на ввод пустой строки
+	if (strlen(buf_string) == 0)
+		return (true);
+
 	//определение массива недопустимых символов
 	char invalid_symbols[] = "!@#$%^&*()_+1234567890-=\"№;:?*,./'][{}<>~` ";
 	int invalid_symbols_lenght = 43;
@@ -39,6 +43,10 @@ bool FIO::SetName(char buf_string[])
 	if (strlen(buf_string) > FIO_fields_size)
 		buf_string[FIO_fields_size - 1] = '\0';
 
+	//Проверка на ввод пустой строки
+	if (strlen(buf_string) == 0)
+		return (true);
+
 	//определение массива недопустимых символов
 	char invalid_symbols[] = "!@#$%^&*()_+1234567890-=\"№;:?*,./'][{}<>~` ";
 	int invalid_symbols_lenght = 43;
@@ -62,6 +70,10 @@ bool FIO::SetPatronymic(char buf_string[])
 	//обрезка входной строки
 	if (strlen(buf_string) > FIO_fields_size)
 		buf_string[FIO_fields_size - 1] = '\0';
+
+	//Проверка на ввод пустой строки
+	if (strlen(buf_string) == 0)
+		return (true);
 
 	//определение массива недопустимых символов
 	char invalid_symbols[] = "!@#$%^&*()_+1234567890-=\"№;:?*,./'][{}<>~` ";
@@ -88,14 +100,16 @@ char* FIO::GetSurName()
 }
 
 //Метод извлечения имени
-char* FIO::GetName() { 
+char* FIO::GetName() 
+{ 
 	char* buf_string = (char*)calloc(FIO_fields_size, sizeof(char));
 	strcpy(buf_string, Name);
 	return (buf_string);
 }
 
 //Метод извлечения отчества
-char* FIO::GetPatronymic() { 
+char* FIO::GetPatronymic() 
+{ 
 	char* buf_string = (char*)calloc(FIO_fields_size, sizeof(char));
 	strcpy(buf_string, Patronymic);
 	return (buf_string);
@@ -104,16 +118,28 @@ char* FIO::GetPatronymic() {
 //Метод  инициализации структуры
 bool FIO::Init(char buf_surname[], char buf_name[], char buf_patronymic[])
 {
+	//создаём объект класса FIO для проверки формата входных данных
+	FIO check;
+
 	//Проверка на формат ввода
-	if (SetSurName(buf_surname) || SetName(buf_name) || SetPatronymic(buf_patronymic))
+	if (check.SetSurName(buf_surname) || check.SetName(buf_name) || check.SetPatronymic(buf_patronymic))
 		return (true);
 	else
+	{
+		SetSurName(buf_surname);
+		SetName(buf_name);
+		SetPatronymic(buf_patronymic);
 		return (false);
+	}
 }
 
 //Метод ввода полей структуры из консоли
 bool FIO::Read()
 {
+	//создаём объект класса FIO для проверки формата входных данных
+	FIO check;
+
+	//создаём буферную строку для проверки формата входных данных
 	char buf_string[FIO_fields_size];
 
 	printf("Enter surname:\n");
@@ -124,7 +150,7 @@ bool FIO::Read()
 	//если строка длиннее 30, то очистить входной поток
 	else rewind(stdin);
 
-	if (SetSurName(buf_string))
+	if (check.SetSurName(buf_string))
 		return (true);
 	else 
 	{
@@ -136,7 +162,7 @@ bool FIO::Read()
 		//если строка длиннее 30, то очистить входной поток
 		else rewind(stdin);
 
-		if (SetName(buf_string))
+		if (check.SetName(buf_string))
 			return(true);
 		else
 		{
@@ -148,10 +174,18 @@ bool FIO::Read()
 			//если строка длиннее 30, то очистить входной поток
 			else rewind(stdin);
 
-			if (SetPatronymic(buf_string))
+			if (check.SetPatronymic(buf_string))
 				return(true);
+
+			//если все проверки на формат успешно пройдены, то
+			//записываем полученные данные в поля объекта
 			else
+			{
+				SetSurName(check.GetSurName());
+				SetName(check.GetName());
+				SetPatronymic(check.GetPatronymic());
 				return (false);
+			}
 		}
 	}
 }
@@ -159,7 +193,7 @@ bool FIO::Read()
 //Метод вывода структуры в консоль
 void FIO::Display()
 {
-	printf("FIO:-%s-%s-%s\n", SurName, Name, Patronymic);
+	printf("FIO: %s %s %s\n", SurName, Name, Patronymic);
 }
 
 #endif FIO_CPP
