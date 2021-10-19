@@ -48,8 +48,9 @@ int main()
 	//—оздание нового объекта из готовых данных
 	printf("-------Init method-------\n");
 	human me;
-
-	if(me.Init(1913, 19, 70, 182, 'M', my_FIO))
+	char gender[] = "F";
+	
+	if(me.Init(1913, 19, 70, 182, gender, my_FIO))
 		printf("error\n");
 	else
 		me.Display();
@@ -64,7 +65,7 @@ int main()
 	//¬вод полей объекта с помощью методов
 	printf("\n------Set methods-------\n");
 	if (me.SetId(1999) || me.SetAge(27) || me.SetHeight(180) ||
-		me.SetWeight(80.890) || me.SetGender('M'))
+		me.SetWeight(80.890) || me.SetGender(strcpy(gender, "M")))
 		printf("error\n");
 	else
 		me.Display();

@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <cmath>
+#include <string.h>
 #include "human.h"
 
 //Защита от переопределения методов структуры
@@ -57,12 +58,21 @@ bool human::SetWeight(float buf)
 }
 
 //Метод установки пола
-bool human::SetGender(char buf)
+bool human::SetGender(char buf_string[])
 {
-	if (buf == 'M' || buf == 'F')
+	//обрезка входной строки
+	if (strlen(buf_string) >= 2)
+		buf_string[2 - 1] = '\0';
+
+	//проверка на ввод пустой строки
+	if (strlen(buf_string) == 0)
+		return (true);
+
+	//сравнение входной строки и допустимых символов
+	if (buf_string[0] == 'M' || buf_string[0] == 'F')
 	{
-		gender = buf;
-		return (false);
+		strcpy(gender, buf_string);
+		return(false);
 	}
 	else
 		return (true);
@@ -97,14 +107,15 @@ float human::GetWeight()
 }
 
 //Метод извлечения пола
-char human::GetGender()
+char* human::GetGender()
 {
-	char buf = gender;
-	return (buf);
+	char* buf_string = (char*)calloc(2, sizeof(char));
+	strcpy(buf_string, gender);
+	return (buf_string);
 }
 
 //Метод инициализации объекта класса
-bool human::Init(int buf_id, int buf_age, int buf_height, float buf_weight, char buf_gender, FIO buf_FIO)
+bool human::Init(int buf_id, int buf_age, int buf_height, float buf_weight, char buf_gender[], FIO buf_FIO)
 {
 	//создаём объект класса human для проверки формата входных данных
 	human check;
@@ -185,35 +196,37 @@ bool human::Read()
 								{
 									//буферный переменная типа char
 									//для проверки формата входных данных 
-									char buf_char;
+									char buf_string[2];
 
 									//проверка на формат входных данных
 									printf("Enter gender:\n");
-									if (scanf("%c", &buf_char) != 1)
-										return (true);
+									fgets(buf_string, 2, stdin);
+									//если строка короче 3, то заменить "перенос на новую строку" "концом строки"
+									if (buf_string[strlen(buf_string) - 1] == '\n')
+										buf_string[strlen(buf_string) - 1] = '\0';
+									//если строка длиннее 2, то очистить входной поток
+									else rewind(stdin);
+
+									//попытка записи в поле объекта
+									if (check.SetGender(buf_string))
+										return(true);
 									else
 									{
-										//попытка записи в поле объекта
-										if (check.SetAge(buf_char))
+										//попытка записи в объект
+										if (check.human_FIO.Read())
 											return (true);
+
+										//когда все проверки пройдены,
+										//можно перенести данные в главный объект
 										else
 										{
-											//попытка записи в объект
-											if (check.human_FIO.Read())
-												return (true);
-
-											//когда все проверки пройдены,
-											//можно перенести данные в главный объект
-											else
-											{
-												SetId(check.GetId());
-												SetAge(check.GetAge());
-												SetHeight(check.GetHeight());
-												SetWeight(check.GetWeight());
-												SetGender(check.GetGender());
-												human_FIO = check.human_FIO;
-												return(false);
-											}
+											SetId(check.GetId());
+											SetAge(check.GetAge());
+											SetHeight(check.GetHeight());
+											SetWeight(check.GetWeight());
+											SetGender(check.GetGender());
+											human_FIO = check.human_FIO;
+											return(false);
 										}
 									}
 								}
@@ -233,7 +246,7 @@ void human::Display()
 	printf("age: %d\n", age);
 	printf("height: %d\n", height);
 	printf("weight: %0.1f\n", weight);
-	printf("gender: %c\n", gender);
+	printf("gender: %s\n", gender);
 	human_FIO.Display();
 }
 
