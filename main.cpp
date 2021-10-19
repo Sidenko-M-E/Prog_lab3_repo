@@ -105,7 +105,7 @@ int main()
 
 	///teacher struct
 	printf("\n--------teacher class--------\n");
-	char Degree[40] = "Candidate_of_Mathematical_Sciences";
+	char Degree[40] = "Candidate of Mathematical Sciences";
 
 	//Создание нового объекта из готовых данных
 	printf("-------Init method-------\n");

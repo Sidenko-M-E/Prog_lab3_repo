@@ -28,8 +28,8 @@ bool teacher::SetDegree(char buf_string[])
 		return (true);
 
 	//определение массива недопустимых символов
-	char invalid_symbols[] = "!@#$%^&*()_+1234567890-=\"№;:?*,./'][{}<>~` ";
-	int invalid_symbols_lenght = 43;
+	char invalid_symbols[] = "!@#$%^&*()_+1234567890-=\"№;:?*,./'][{}<>~`";
+	int invalid_symbols_lenght = 42;
 
 	//посимвольное сравнение входной строки и массива недопустимых символов
 	int buf_len = strlen(buf_string);
