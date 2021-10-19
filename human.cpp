@@ -200,6 +200,7 @@ bool human::Read()
 
 									//проверка на формат входных данных
 									printf("Enter gender:\n");
+									rewind(stdin);
 									fgets(buf_string, 2, stdin);
 									//если строка короче 3, то заменить "перенос на новую строку" "концом строки"
 									if (buf_string[strlen(buf_string) - 1] == '\n')

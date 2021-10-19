@@ -56,8 +56,8 @@ bool student::SetGroup(char buf_string[])
 		return (true);
 
 	//определение массива недопустимых символов
-	char invalid_symbols[] = "!@#$%^&*()_+1234567890=\"№;:?*,./'][{}<>~` ";
-	int invalid_symbols_lenght = 42;
+	char invalid_symbols[] = "!@#$%^&*()_+=\"№;:?*,./'][{}<>~` ";
+	int invalid_symbols_lenght = 32;
 
 	//посимвольное сравнение входной строки и массива недопустимых символов
 	int buf_len = strlen(buf_string);
@@ -134,7 +134,7 @@ char* student::GetFacultyName()
 //Метод  инициализации объекта класса
 bool student::Init(int buf_course, char buf_EduProg[], char buf_Group[], char buf_FacultyName[], human buf_human)
 {
-	//создаём объект класса human для проверки формата входных данных
+	//создаём объект класса student для проверки формата входных данных
 	student check;
 
 	//проверка на формат ввода human??????????
@@ -175,7 +175,7 @@ bool student::Read()
 		{
 			//создаём буферную строку для проверки формата входных данных
 			char buf_string[FIO_fields_size];
-
+			rewind(stdin);
 			printf("Enter education programm:\n");
 			fgets(buf_string, FIO_fields_size / 3 * 2, stdin);
 			//если строка короче 20, то заменить "перенос на новую строку" "концом строки"

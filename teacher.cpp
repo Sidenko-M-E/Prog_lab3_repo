@@ -138,7 +138,7 @@ bool teacher::Read()
 		{
 			//создаём буферную строку для проверки формата входных данных
 			char buf_string[40];
-
+			rewind(stdin);
 			printf("Enter scientific degree:\n");
 			fgets(buf_string, 40, stdin);
 			//если строка короче 40, то заменить "перенос на новую строку" "концом строки"

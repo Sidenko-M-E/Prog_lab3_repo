@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
-#include <malloc.h> //
 #include "student.h"
 #include "teacher.h"
 #include "faculty.h"
@@ -12,7 +11,6 @@
 
 int main()
 {
-	/*
 	///FIO struct
 	printf("--------FIO class--------\n");
 	char Familia[30] = "Sidenko";
@@ -127,7 +125,7 @@ int main()
 
 	//Ввод полей объекта с помощью методов
 	printf("\n------Set methods-------\n");
-	if (my_teacher.SetWorkExp(30) || my_teacher.SetDegree(strcpy(Degree, "Doctor_of_Mathematical_Sciences")) || my_teacher.SetFacultyName(FacultyName))
+	if (my_teacher.SetWorkExp(30) || my_teacher.SetDegree(strcpy(Degree, "Doctor of Mathematical Sciences")) || my_teacher.SetFacultyName(FacultyName))
 		printf("error\n");
 	else
 		my_teacher.Display();
@@ -164,17 +162,15 @@ int main()
 	printf("Procent of doctors on faculty: %0.2lf\n", my_faculty.ProcentOfDoctors());
 	printf("Students to teachers quantity: %0.2lf\n", my_faculty.ProcOfStudToTeach());
 
-	*/
-	//Демонстрация работы с памятью
-	printf("\n----dynamic memmory demo----\n");
 
+
+	///Демонстрация работы с памятью
+	printf("\n------dynamic memmory demo------\n");
 	printf("----dynamic array of objects----\n");
 
 	int count; //кол-во объектов динамического массива
 	printf("Enter the number of objects, that you want to create:\n");
 	scanf("%d", &count);
-
-	char FacultyName[] = "FoIT";
 
 	//example_faculty[i] - объект класса 
 	faculty* example_faculty = new faculty[count];//динамический массив объектов класса faculty.
@@ -182,10 +178,11 @@ int main()
 	{
 		example_faculty[i].Init(FacultyName, i, i, i, i, i, i, i);
 		example_faculty[i].Display();
+		printf("******************\n");
 	}
 	delete[] example_faculty;
 	
-	printf("----array of dynamic objects----\n");
+	printf("\n----array of dynamic objects----\n\n");
 	//создание 5 указателей на объекты класса faculty
 	//содержимое этих указателей не определено!!!
 	//arr[i] - указатель на объект
@@ -195,10 +192,10 @@ int main()
 		//определяем содержимое каждого из указателей
 		arr[i] = new faculty;
 		arr[i]->Init(FacultyName, i, i, i, i, i, i, i);
-		arr[i]->Display();
+		(*arr[i]).Display(); //(*smth). взаимозаменяемо с smth->
+		printf("******************\n");
+		delete arr[i];
 	}
-
-	delete[] arr; //?????
 	
 	//Конец демонстрационного варианта
 	printf("\nPress any key to exit.\n");
