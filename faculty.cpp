@@ -227,14 +227,14 @@ bool faculty::Init(char buf_FacultyName[], int stud_quan, int bach_quan, int mas
 	faculty check;
 
 	//проверка на формат ввода 
-	if (check.SetFacultyName(FacultyName) || check.SetQuantityOfStudents(stud_quan) ||
+	if (check.SetFacultyName(buf_FacultyName) || check.SetQuantityOfStudents(stud_quan) ||
 		check.SetQuantityOfBachelors(bach_quan) || check.SetQuantityOfMasters(mast_quan) ||
 		check.SetQuantityOfTeachers(teac_quan) || check.SetQuantityOfCandidates(cand_quan) ||
 		check.SetQuantityOfDoctors(doct_quan) || check.SetQuantityOfDisciplines(disc_quan))
 		return (true);
 	else
 	{
-		SetFacultyName(FacultyName);
+		SetFacultyName(buf_FacultyName);
 		SetQuantityOfStudents(stud_quan);
 		SetQuantityOfBachelors(bach_quan);
 		SetQuantityOfMasters(mast_quan);

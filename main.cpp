@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
+#include <malloc.h> //
 #include "student.h"
 #include "teacher.h"
 #include "faculty.h"
@@ -11,6 +12,7 @@
 
 int main()
 {
+	/*
 	///FIO struct
 	printf("--------FIO class--------\n");
 	char Familia[30] = "Sidenko";
@@ -162,7 +164,42 @@ int main()
 	printf("Procent of doctors on faculty: %0.2lf\n", my_faculty.ProcentOfDoctors());
 	printf("Students to teachers quantity: %0.2lf\n", my_faculty.ProcOfStudToTeach());
 
+	*/
+	//Демонстрация работы с памятью
+	printf("\n----dynamic memmory demo----\n");
 
+	printf("----dynamic array of objects----\n");
+
+	int count; //кол-во объектов динамического массива
+	printf("Enter the number of objects, that you want to create:\n");
+	scanf("%d", &count);
+
+	char FacultyName[] = "FoIT";
+
+	//example_faculty[i] - объект класса 
+	faculty* example_faculty = new faculty[count];//динамический массив объектов класса faculty.
+	for (int i = 0; i < count; i++) 
+	{
+		example_faculty[i].Init(FacultyName, i, i, i, i, i, i, i);
+		example_faculty[i].Display();
+	}
+	delete[] example_faculty;
+	
+	printf("----array of dynamic objects----\n");
+	//создание 5 указателей на объекты класса faculty
+	//содержимое этих указателей не определено!!!
+	//arr[i] - указатель на объект
+	faculty* arr[5]; 
+	for (int i = 0; i < 5; i++) 
+	{
+		//определяем содержимое каждого из указателей
+		arr[i] = new faculty;
+		arr[i]->Init(FacultyName, i, i, i, i, i, i, i);
+		arr[i]->Display();
+	}
+
+	delete[] arr; //?????
+	
 	//Конец демонстрационного варианта
 	printf("\nPress any key to exit.\n");
 	_getch();
