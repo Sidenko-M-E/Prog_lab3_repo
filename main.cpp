@@ -150,13 +150,13 @@ int main()
 	else
 		my_faculty.Display();
 
-	//Ввод полей структуры с помощью функций
-	printf("\n--------function enter--------\n");
+	//Ввод полей объекта с помощью методов
+	printf("\n------Shortcut-Set methods-------\n");
 	my_faculty.SetStudentsInfo(300, 270, 30);
 	my_faculty.SetTeachersInfo(40, 33, 7);
 	my_faculty.Display();
 
-	//Функции обработки содержимого структуры
+	//Метод вывода содержимого объекта класса в консоль
 	printf("\n----processing by functions----\n");
 	printf("Procent of masters on faculty: %0.2lf\n", my_faculty.ProcentOfMasters());
 	printf("Procent of doctors on faculty: %0.2lf\n", my_faculty.ProcentOfDoctors());
@@ -172,29 +172,29 @@ int main()
 	printf("Enter the number of objects, that you want to create:\n");
 	scanf("%d", &count);
 
-	//example_faculty[i] - объект класса 
-	faculty* example_faculty = new faculty[count];//динамический массив объектов класса faculty.
+	//dynamic_array[i] - объект класса 
+	faculty* dynamic_array = new faculty[count];//динамический массив объектов класса faculty.
 	for (int i = 0; i < count; i++) 
 	{
-		example_faculty[i].Init(FacultyName, i, i, i, i, i, i, i);
-		example_faculty[i].Display();
+		dynamic_array[i].Init(FacultyName, i, i, i, i, i, i, i);
+		dynamic_array[i].Display();
 		printf("******************\n");
 	}
-	delete[] example_faculty;
+	delete[] dynamic_array;
 	
-	printf("\n----array of dynamic objects----\n\n");
+	printf("\n----array of 5 dynamic objects----\n\n");
 	//создание 5 указателей на объекты класса faculty
 	//содержимое этих указателей не определено!!!
-	//arr[i] - указатель на объект
-	faculty* arr[5]; 
+	//array_of_dynamic[i] - указатель на объект
+	faculty* array_of_dynamic[5];
 	for (int i = 0; i < 5; i++) 
 	{
 		//определяем содержимое каждого из указателей
-		arr[i] = new faculty;
-		arr[i]->Init(FacultyName, i, i, i, i, i, i, i);
-		(*arr[i]).Display(); //(*smth). взаимозаменяемо с smth->
+		array_of_dynamic[i] = new faculty;
+		array_of_dynamic[i]->Init(FacultyName, i, i, i, i, i, i, i);
+		(*array_of_dynamic[i]).Display(); //(*smth). взаимозаменяемо с smth->
 		printf("******************\n");
-		delete arr[i];
+		delete array_of_dynamic[i];
 	}
 	
 	//Конец демонстрационного варианта
